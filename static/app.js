@@ -1,35 +1,43 @@
-const chatForm = document.getElementById("chat-form");
-const userInput = document.getElementById("user-input");
 const chatBox = document.getElementById("chat-box");
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+
+function addMessage(text, sender) {
+    const message = document.createElement("div");
+    message.classList.add("message", sender);
+    message.textContent = text;
+    chatBox.appendChild(message);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// LLM intro on page load
+window.addEventListener("load", () => {
+    addMessage("Hello! I'm Ryan Gao. Ask me anything about my experience and background.", "bot");
+});
 
 chatForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const message = userInput.value.trim();
-  if (!message) return;
+    e.preventDefault();
+    const userMessage = chatInput.value.trim();
+    if (!userMessage) return;
 
-  // Display user's message
-  const userMsgDiv = document.createElement("div");
-  userMsgDiv.className = "chat-message user-message";
-  userMsgDiv.textContent = message;
-  chatBox.appendChild(userMsgDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
+    addMessage(userMessage, "user");
+    chatInput.value = "";
 
-  userInput.value = "";
+    try {
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({message: userMessage})
+        });
 
-  try {
-    const response = await fetch("/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
-    });
-
-    const data = await response.json();
-    const botMsgDiv = document.createElement("div");
-    botMsgDiv.className = "chat-message bot-message";
-    botMsgDiv.textContent = data.reply || data.error;
-    chatBox.appendChild(botMsgDiv);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  } catch (err) {
-    console.error("Fetch/JSON error:", err);
-  }
+        const data = await response.json();
+        if (data.reply) {
+            addMessage(data.reply, "bot");
+        } else {
+            addMessage("Error: No reply received.", "bot");
+        }
+    } catch (err) {
+        addMessage("Error connecting to server.", "bot");
+        console.error(err);
+    }
 });
