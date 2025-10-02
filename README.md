@@ -28,7 +28,7 @@ source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Set up your Gemini API key
+4. Set up your Gemini 2.0 Flash API key
 - Create a `.env` file in the project root
 - Add your API key:
 ```
