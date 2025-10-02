@@ -16,10 +16,10 @@ except AttributeError:
 # Initialize Gemini model
 model = genai.GenerativeModel('gemini-2.0-flash')
 
-# Flask app
+# Flask
 app = Flask(__name__)
 
-# System message: LLM acts as you (Ryan Gao)
+# System message
 def get_system_message():
     return {
         "role": "user",
