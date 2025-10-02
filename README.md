@@ -1,23 +1,46 @@
-# Ryan Gao Chatbot
+# AI Chatbot with Gemini
 
-A personal chatbot that simulates Ryan Gao speaking to a recruiter. Built with **Python**, **Flask**, and **Google’s Gemini AI**, this project demonstrates a minimalistic, futuristic front-end and a conversational AI back-end.
-
----
+This project is an AI-powered chatbot built using Google’s Gemini API.
+It supports natural language conversations, maintains conversational memory, and includes prompt optimization techniques.
+The code is fully hosted on GitHub and demonstrates practical applications of AI, API integration, and version control.
 
 ## Features
+- Conversational AI using Gemini API
+- Persistent memory across interactions
+- Optimized prompt handling for accurate responses
 
-- **Recruiter Chat Simulation**: The LLM responds as Ryan Gao, highlighting achievements, skills, and experiences.  
-- **Fresh Session Every Chat**: Each new page load starts with a self-introduction.  
-- **Minimalistic, Modern UI**: Clean interface with subtle animations and smooth message display.  
-- **Front-End**: Responsive chat interface with fade-in messages.  
-- **Back-End**: Python Flask server integrated with Google Gemini AI for generating responses.
+## Setup Instructions
 
----
+1. Clone the repository
+```
+git clone https://github.com/RyanGaoo/Ryan-Gao-Chat-Bot.git
+cd Ryan-Gao-Chat-Bot
+```
 
-## Technologies Used
+2. Create a virtual environment (optional but recommended)
+```
+python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+```
 
-- **Python 3.10+**  
-- **Flask** – lightweight web server  
-- **Google Generative AI (Gemini)** – chatbot engine  
-- **HTML / CSS / JavaScript** – front-end  
-- **dotenv** – manage API keys securely  
+3. Install dependencies
+```
+pip install -r requirements.txt
+```
+
+4. Set up your Gemini API key
+- Create a `.env` file in the project root
+- Add your API key:
+```
+GEMINI_API_KEY=your_api_key_here
+```
+
+5. Run the chatbot
+```
+python app.py
+```
+
+6. Interact with the chatbot via the command line or the hosted interface.
+
+## Contributing
+Pull requests are welcome! Please follow standard GitHub best practices.
