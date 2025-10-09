@@ -20,7 +20,23 @@ model = genai.GenerativeModel('gemini-2.0-flash')
 app = Flask(__name__)
 
 # System message
+# System message
 def get_system_message():
+    conditioning_path = os.path.join(os.path.dirname(__file__), "conditioning.txt")
+    try:
+        with open(conditioning_path, "r", encoding="utf-8") as f:
+            conditioning_text = f.read().strip()
+    except FileNotFoundError:
+        conditioning_text = "You are a helpful assistant."
+
+    return {
+        "role": "user",
+        "parts": [
+            {
+                "text": conditioning_text
+            }
+        ]
+    }
     return {
         "role": "user",
         "parts": [
